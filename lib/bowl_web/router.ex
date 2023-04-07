@@ -7,6 +7,8 @@ defmodule BowlWeb.Router do
 
   scope "/api", BowlWeb do
     pipe_through :api
+
+    resources "/data", DataController, except: [:create, :new, :edit]
   end
 
   # Enable LiveDashboard in development

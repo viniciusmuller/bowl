@@ -8,6 +8,7 @@ defmodule Bowl.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      {Cachex, name: :bowl_cache},
       # Start the Telemetry supervisor
       BowlWeb.Telemetry,
       # Start the PubSub system
