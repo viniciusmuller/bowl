@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bowl-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bowl
+  template:
+    metadata:
+      labels:
+        app: bowl
+    spec:
+      containers:
+        - name: bowl
+          image: bowl:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4000
+          env:
+            - name: SECRET_KEY_BASE
+              value: "hVWHh0J2411bugVxIfl/gEkZema8/gh2duvWdODLQIt3OjEtAj42BalC0es64Hal"
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+---
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: bowl-nodes
+spec:
+  clusterIP: None
+  selector:
+    app: bowl
+  ports:
+    - name: epmd
+      port: 4369
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bowl-service
+spec:
+  ports:
+    - port: 80
+      targetPort: 4000
+      protocol: TCP
+      name: http
+  selector:
+    app: bowl
+  type: LoadBalancer

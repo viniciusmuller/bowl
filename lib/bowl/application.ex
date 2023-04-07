@@ -7,7 +7,19 @@ defmodule Bowl.Application do
 
   @impl true
   def start(_type, _args) do
+    topologies = [
+      k8s: [
+        strategy: Elixir.Cluster.Strategy.Kubernetes.DNS,
+        config: [
+          service: System.get_env("SERVICE_NAME", "bowl-nodes"),
+          application_name: "bowl",
+          polling_interval: 10_000
+        ]
+      ]
+    ]
+
     children = [
+      {Cluster.Supervisor, [topologies, [name: Bowl.ClusterSupervisor]]},
       {Cachex, name: :bowl_cache},
       # Start the Telemetry supervisor
       BowlWeb.Telemetry,
