@@ -19,8 +19,8 @@ defmodule Bowl.Application do
     ]
 
     children = [
+      Bowl.Cache,
       {Cluster.Supervisor, [topologies, [name: Bowl.ClusterSupervisor]]},
-      {Cachex, name: :bowl_cache},
       # Start the Telemetry supervisor
       BowlWeb.Telemetry,
       # Start the PubSub system

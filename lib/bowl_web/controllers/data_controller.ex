@@ -11,7 +11,6 @@ defmodule BowlWeb.DataController do
     case Store.get(id) do
       {:error, :not_found} -> send_resp(conn, 404, "Key not found")
       {:ok, value} -> send_resp(conn, 200, value)
-      {:error, _} -> send_resp(conn, 500, "Could not fetch key")
     end
   end
 
