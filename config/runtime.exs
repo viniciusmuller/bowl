@@ -48,6 +48,18 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :libcluster,
+    topologies: [
+      k8s: [
+        strategy: Elixir.Cluster.Strategy.Kubernetes.DNS,
+        config: [
+          service: System.get_env("SERVICE_NAME", "bowl-nodes"),
+          application_name: "bowl",
+          polling_interval: 10_000
+        ]
+      ]
+    ]
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
