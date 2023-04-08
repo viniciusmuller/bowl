@@ -17,6 +17,14 @@ Key updated
 
 $ curl 127.0.0.1:4000/api/data/my-key
 value!
+
+$ curl -X PUT 127.0.0.1:4000/api/data/my-key -d "value!" -H "Content-Type: application/octet-stream" 
+Key updated
+
+$ curl -X DELETE 127.0.0.1:4000/api/data/my-key
+
+$ curl 127.0.0.1:4000/api/data/my-key
+Key not found
 ```
 
 ## Developing
