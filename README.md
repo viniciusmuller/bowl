@@ -8,6 +8,17 @@ capabilities, [libcluster](https://github.com/bitwalker/libcluster) to build the
 cluster and [Phoenix](https://www.phoenixframework.org/) to provide a simple
 HTTP interface.
 
+
+## Example usage
+
+```sh
+$ curl -X PUT 127.0.0.1:4000/api/data/my-key -d "value!" -H "Content-Type: application/octet-stream" 
+Key updated
+
+$ curl 127.0.0.1:4000/api/data/my-key
+value!
+```
+
 ## Developing
 
 ```
