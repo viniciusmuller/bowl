@@ -1,6 +1,6 @@
 # Bowl
 
-Bowl is a simple distributed key-value storage, that leverages the elixir/erlang
+Bowl is a simple distributed key-value store, that leverages the elixir/erlang
 ecosystem in order to get its functionalities.
 
 It uses [Nebulex](https://github.com/cabol/nebulex) in order to get the caching
